@@ -1,17 +1,26 @@
 <%- include('../../partials/siteHeader', {pageTitle: "Dishes Page"}) %>
 
-<div class="allDishes">
-    
-    <% products.forEach((oneProduct) => { %>
-        <div class="oneDish">            
-            <div class="dishDetails">
-                <h2><%= oneProduct.productName %></h2>
-                <h4><%= oneProduct.weight %></h4>
-                <h3><%= oneProduct.description %></h3>
-            </div>
-        </div>
-    <% }); %>
-    
-</div>
+<%if(products.length > 0){%>
+    <table border>
+        <tr>
+            <th>Product Name</th><th>weight</th><th>Operations</th>
+        </tr>    
+        <% products.forEach((oneProduct) => { %>
+            <tr>
+                <th><%= oneProduct.productName %></th>
+                <th><%= oneProduct.weight %></th>
+                <th>
+                    <a href="/products/show/<%=oneProduct.id%>">
+                        Details
+                    </a>
+                </th>
+            </tr>
+        <% }); %>
+    </table>
+<%}
+else {%>
+    <h3>No products created yet !!!!</h3>
+<%}%>
+
 
 <%- include('../../partials/siteFooter') %>

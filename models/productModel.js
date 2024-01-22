@@ -17,7 +17,18 @@ async function index() {
     });
 }
 
+async function show(id) {
+    return new Promise((resolve, reject) => {
+        connection.query("SELECT * FROM products WHERE id=?", [id], (error, result) => {
+            if(!error) {
+                resolve(result);
+            }
+        })
+    });
+}
+
 
 module.exports = {
-    index
+    index,
+    show
 }

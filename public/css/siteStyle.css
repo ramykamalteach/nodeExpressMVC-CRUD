@@ -25,3 +25,12 @@ body {
     border-radius: 15px;
     margin: 0 15px;
 }
+
+/* ----------------------------- */
+table {
+    width: 77%;
+    margin: 0 auto;
+}
+tr:nth-child(odd) {
+    background-color: lightskyblue;
+}

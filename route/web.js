@@ -35,6 +35,9 @@ webRouter.get('/dishes', async (req, res) => {
 webRouter.get('/products', (req, res) => {
     productController.index(req, res);
 });
+webRouter.get('/products/show/:id', (req, res) => {
+    productController.show(req, res);
+});
 
 // add more route roles
 

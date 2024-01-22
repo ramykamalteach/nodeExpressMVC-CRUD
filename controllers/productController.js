@@ -7,8 +7,16 @@ const index = (req, res) => {
         });
 }
 
+const show = (req, res) => {
+    const id = req.params['id'];
+    productModel.show(id)
+        .then(oneProduct => {
+            res.render("pages/products/show", { oneProduct });
+        });
+}
 
 
 module.exports = {
-    index
+    index,
+    show
 }
