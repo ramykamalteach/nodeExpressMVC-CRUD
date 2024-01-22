@@ -1,0 +1,20 @@
+<%- include('../partials/siteHeader', {pageTitle: "Dishes Page"}) %>
+
+<div class="allDishes">
+    
+    <% allDishes.forEach((oneDish) => { %>
+        <div class="oneDish">
+            <div class="dishPhoto">
+                <img src="/img/<%= oneDish.photo %>" alt="">
+            </div>
+            <div class="dishDetails">
+                <h2><%= oneDish.name %></h2>
+                <h4><%= oneDish.desc %></h4>
+                <h3><%= oneDish.price %></h3>
+            </div>
+        </div>
+    <% }); %>
+    
+</div>
+
+<%- include('../partials/siteFooter') %>

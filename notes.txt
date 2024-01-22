@@ -1,0 +1,142 @@
+phase 001 - start server
+
+- > npm init -y
+
+- > npm i express
+
+create /index.js
+
+at index.js :
+            app.get('/', (req, res) => {
+                res.send("welcome to our Home page");
+            });
+            app.get('/about', (req, res) => {
+                res.send("About our Company");
+            });
+
+            port = 3000;
+            app.listen(port, () => {
+                //
+                console.log("server start at port " + port);
+            });
+
+server works at http://localhost:3000/
+-------------------------------------------------------------------------
+
+
+phase 002 - web view
+
+- > npm i path
+
+in index.js add : 
+        const path = require('path');
+
+        app.get('/x', (req, res) => {
+            res.sendFile(path.join(__dirname, '/contacts.html'));
+        });
+
+
+******* for every html or web view file ---> put in folder named "views"
+
+------------------------------------------------------------
+
+phase 003 - EJS as a (view engine)
+
+- > npm i ejs -g
+
+in index.js add :
+        /* ------------- view engine ------------------ */
+        app.set('view engine', 'ejs');
+
+        /* -------------- page ------------------------ */
+        app.get('/', (req, res) => {
+            res.render('home');
+        });
+
+in "views" folder add files *.ejs : home.ejs
+********* ejs file similar to html
+
+in "views" folder add two folder : "pages", "partials"
+
+to include partial in page or partial with passed paramerters :
+        <%- include('../partials/siteHeader', {pageTitle: "Home Page"}) %>
+
+to write a passed paramerter :
+        <%= pageTitle %>
+
+--- vs code extension : EJS language support
+
+******* send variables and arrays to EJS view
+******* javascript code in ejs (foreach, if) : 
+            <% javascript code %>
+
+-------------------------------------------------------------------------
+
+phase 004 : public folder
+
+    for static files: img, css, font, js, ...........
+
+    in index.js
+        app.use(express.static(__dirname + '/public'));
+
+-------------------------------------------------------------------------
+
+phase 005 : dotenv file
+
+    - > npm i dotenv
+    - in root folder create file : .env
+    - in .env file add attributes like : PORT=3000
+    - in index.js apply dotenv : require('dotenv').config();
+    - in index.js get attribute : port = process.env.PORT;
+
+-------------------------------------------------------------------------
+phase 006 : Router
+
+    - add /route/web.js    as a router file
+    - move req,res functions from index.js to web.js
+    - in index.js make webRouter object the express router :
+        const webRouter = require('./route/web');
+        app.use(webRouter);
+    - in web.js make the express router object :
+        const express = require('express');
+        const webRouter = express.Router();
+    - in web.js make route roles with webRouter object:
+        webRouter.get('/about', (req, res) => {
+            res.render('pages/about');
+        });
+    - in web.js export webRouter :
+        module.exports = webRouter;
+
+------------------------------------------------------------------
+
+phase 007 : Controller (buisness logic/layer)
+
+    - create "controllers" folder
+    - add in it controller files
+    - in router file add controller :
+        const staffController = require('../controllers/staffController');
+    - in router file apply controller in specific "route role" :
+        webRouter.get('/staff', staffController(req, res));
+
+-------------------------------------------------------------------
+
+phase 008 : Model (deals with database)
+
+    - create "models" folder
+    - add in it model files
+    - in a controller add the model :
+        const staffModel = require('../models/staffModel');
+    - in model file write code to get data ......... database, json, ...
+
+-------------------------------------------------------------------
+
+phase 009 : Try Application
+
+    - create database
+    - add static files in "public" : images, css, js, fonts, ...
+    
+    - view static
+    - route role
+    - controller
+    - model
+    - view dynamic
