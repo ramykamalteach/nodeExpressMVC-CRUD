@@ -59,4 +59,7 @@ in router
         productController.index(req, res);
     });
 
-    
+
+----------------------
+data from a HTML Form 
+    req.body ===> req.body.fieldName

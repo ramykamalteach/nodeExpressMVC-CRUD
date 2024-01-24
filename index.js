@@ -7,7 +7,8 @@ require('dotenv').config();
 app.use(express.static(__dirname + '/public'));
 /* ------------- view engine ------------------ */
 app.set('view engine', 'ejs');
-
+/* -------------- using form data -------------- */
+app.use(express.urlencoded({extended: true}));
 /* ------------- router ----------------------- */
 const webRouter = require('./route/web');
 app.use(webRouter);

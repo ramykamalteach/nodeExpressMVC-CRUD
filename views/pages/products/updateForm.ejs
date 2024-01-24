@@ -1,0 +1,22 @@
+<%- include('../../partials/siteHeader', {pageTitle: "Dishes Page"}) %>
+
+<h3>Create New Product</h3>
+
+<form action="../update" method="post">
+    <label for="productName">product Name</label>
+    <input type="text" name="productName" id="productName" value="<%= oneProduct[0].productName %>">
+    <br>
+    <label for="weight">weight</label>
+    <input type="number" name="weight" id="weight" value="<%= oneProduct[0].weight %>">
+    <br>
+    <label for="description">weight</label>
+    <textarea name="description" id="description"><%= oneProduct[0].description %></textarea>
+    <br>
+
+    <input type="hidden" name="id" value="<%= oneProduct[0].id %>">
+
+    <input type="submit" value="Create New Product">
+</form>
+
+
+<%- include('../../partials/siteFooter') %>
