@@ -1,4 +1,43 @@
 create CRUD in MVC pattern with Mysql database to add photo
 ---------------------------------
 
+Multer package : used for upload files
+- > npm i multer
+
+in createForm.ejs
+    <form action="./store" method="post" enctype="multipart/form-data">
+
+
+in router file (web.js)
+    const app = express();
+
+    app.use(express.json());
+    app.use(express.urlencoded({
+        extended: true
+    }));
+
+    const multer = require("multer");
+
+    const path = require("path");
+
+    const storage = multer.diskStorage({
+        destination: (req, file, cb) => {
+            cb(null, "public/img/uploades");
+        },
+        filename: (req, file, cb) => {
+            if(file){
+                cb(null, Date.now() + path.extname(file.originalname))
+            }
+        }
+    });
+
+    const upload = multer({
+        storage: storage
+    });
+
+
+route roles :
+        webRouter.post('/products/store', upload.single('photo') , (req, res) => {
+            productController.store(req, res);
+        });
 

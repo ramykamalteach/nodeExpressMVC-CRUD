@@ -5,15 +5,15 @@
         <tr>
             <th>Product name</th>
             <th><%= oneProduct[0].productName %></th>   <!-- oneProduct is array [0] -->
+            <th rowspan="3">
+                <img src="/img/uploades/<%=oneProduct[0].photo%>" width="250" alt="">
+            </th>
         </tr>
         <tr>
             <th>Product weight</th>
             <th><%= oneProduct[0].weight %></th>
         </tr>
-        <tr>
-            <th>Product description</th>
-            <th><%= oneProduct[0].description %></th>
-        </tr>
+        
     </table>
 <%}
 else {%>

@@ -30,10 +30,10 @@ async function show(id) {
 async function store(createFormData) {
     const productName = createFormData.productName;
     const weight = createFormData.weight;
-    const description = createFormData.description;
+    const photo = createFormData.photo;
 
     return new Promise((resolve, reject) => {
-        connection.query("INSERT INTO products (productName, weight, description) VALUES (?,?,?)", [productName, weight, description], (error, result) => {
+        connection.query("INSERT INTO products (productName, weight, photo) VALUES (?,?,?)", [productName, weight, photo], (error, result) => {
             if(error) {
                 return res.json({ err: error});
             }
@@ -56,10 +56,19 @@ async function update(updateFormData) {
     const id = updateFormData.id;
     const productName = updateFormData.productName;
     const weight = updateFormData.weight;
-    const description = updateFormData.description;
+    const photo = updateFormData.photo;
+
+    if(photo != "") {
+        var updateSQL = "UPDATE products SET productName=?, weight=?, photo=? WHERE id=?";
+        var updatedFields = [productName, weight, photo, id];
+    }
+    else {
+        var updateSQL = "UPDATE products SET productName=?, weight=? WHERE id=?";
+        var updatedFields = [productName, weight, id];
+    }
 
     return new Promise((resolve, reject) => {
-        connection.query("UPDATE products SET productName=?, weight=?, description=? WHERE id=? ", [productName, weight, description, id], (error, result) => {
+        connection.query(updateSQL, updatedFields, (error, result) => {
             if(error) {
                 return res.json({ err: error});
             }
